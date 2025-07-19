@@ -28,12 +28,15 @@ public class DiningTable {
 	private int capacity;
 	
 	private boolean isActive;
-	
-	private boolean isOccupied;
 
 	@Column(updatable = false)
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@OneToMany(mappedBy = "table", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Session> sessions = new ArrayList<>();
+	
+	public boolean isOccupied() {
+        return this.sessions.stream()
+            .anyMatch(session -> session.isActive());
+    }
 }

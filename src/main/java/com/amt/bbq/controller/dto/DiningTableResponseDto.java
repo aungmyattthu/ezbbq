@@ -9,7 +9,7 @@ public record DiningTableResponseDto(
 		boolean isOccupied,
 		boolean isActive) {
 
-	public static DiningTableResponseDto from(DiningTable entity) {
+	public static DiningTableResponseDto mapToDto(DiningTable entity) {
 
 		return new DiningTableResponseDto(
 				entity.getId(), 
