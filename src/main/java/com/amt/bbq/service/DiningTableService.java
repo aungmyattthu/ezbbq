@@ -79,9 +79,6 @@ public class DiningTableService {
 			if (form.isActive() != null) {
 				predicates.add(cb.equal(root.get("isActive"), form.isActive()));
 			}
-//			if (form.isOccupied() != null) {
-//				predicates.add(cb.equal(root.get("isOccupied"), form.isOccupied()));
-//			}
 
 			return cb.and(predicates.toArray(new Predicate[0]));
 		};

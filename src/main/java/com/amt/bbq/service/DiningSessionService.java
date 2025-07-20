@@ -22,6 +22,8 @@ import com.amt.bbq.model.repo.DiningSessionRepository;
 import com.amt.bbq.model.repo.DiningTableRepository;
 import com.amt.bbq.utils.exceptions.BusinessRuleException;
 
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -52,7 +54,47 @@ public class DiningSessionService {
 	private Specification<DiningSession> buildSearchSpecification(DiningSessionSearch form) {
 		return (root, query, cb) -> {
 			List<Predicate> predicates = new ArrayList<Predicate>();
-			// TODO 
+
+		   
+	        Join<DiningSession, DiningTable> tableJoin = root.join("table", JoinType.INNER);
+
+	        // Filter by table ID
+	        if(form.tableId() != null) {
+	            predicates.add(cb.equal(root.get("table").get("id"), form.tableId()));
+	        }
+
+	        // Filter by table name (search in joined DiningTable)
+	        if (form.tableName() != null) {
+	            predicates.add(cb.like(
+	                cb.lower(tableJoin.get("tableName")), 
+	                "%" + form.tableName().toLowerCase() + "%"
+	            ));
+	        }
+
+	        // Filter by start time (after or equal)
+	        if (form.startTime() != null) {
+	            predicates.add(cb.greaterThanOrEqualTo(
+	                root.get("startTime"), 
+	                form.startTime()
+	            ));
+	        }
+
+	        // Filter by end time (before or equal)
+	        if (form.endTime() != null) {
+	            predicates.add(cb.lessThanOrEqualTo(
+	                root.get("endTime"), 
+	                form.endTime()
+	            ));
+	        }
+
+	        // Filter by active status
+	        if (form.isActive() != null) {
+	            predicates.add(cb.equal(
+	                root.get("isActive"), 
+	                form.isActive()
+	            ));
+	        }
+
 
 			return cb.and(predicates.toArray(new Predicate[0]));
 		};

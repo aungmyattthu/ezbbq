@@ -1,7 +1,6 @@
 package com.amt.bbq.controller.dto.diningTable;
 
 import com.amt.bbq.controller.dto.diningSession.DiningSessionResponseDto;
-import com.amt.bbq.model.entity.DiningSession;
 import com.amt.bbq.model.entity.DiningTable;
 
 public record DiningTableResponseDto(
