@@ -31,7 +31,7 @@ public class Order {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "session_id", nullable = false)
-	private Session session;
+	private DiningSession session;
 
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime createdAt = LocalDateTime.now();

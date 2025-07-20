@@ -1,4 +1,4 @@
-package com.amt.bbq.controller.dto;
+package com.amt.bbq.controller.dto.diningTable;
 
 import com.amt.bbq.model.entity.DiningTable;
 

@@ -18,7 +18,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Session {
+public class DiningSession {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,9 +32,7 @@ public class Session {
 
 	private LocalDateTime endTime;
 
-	private boolean isActive = true;
-
-	private int customerCount;
+	private boolean isActive;
 
 	@OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Order> orders = new ArrayList<>();
