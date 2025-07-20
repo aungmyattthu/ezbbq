@@ -33,10 +33,16 @@ public class DiningTable {
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@OneToMany(mappedBy = "table", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Session> sessions = new ArrayList<>();
+	private List<DiningSession> sessions = new ArrayList<>();
 	
 	public boolean isOccupied() {
         return this.sessions.stream()
             .anyMatch(session -> session.isActive());
     }
+	
+	public DiningSession getActiveSession() {
+		return this.sessions.stream()
+	            .filter(session -> session.isActive())
+	            .findFirst().orElse(new DiningSession());
+	}
 }

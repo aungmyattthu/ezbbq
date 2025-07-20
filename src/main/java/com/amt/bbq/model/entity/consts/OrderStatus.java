@@ -2,9 +2,6 @@ package com.amt.bbq.model.entity.consts;
 
 public enum OrderStatus {
     PENDING("Pending", "warning"),
-    PREPARING("Preparing", "primary"),
-    COMPLETED("Completed", "success"),
-    CANCELLED("Cancelled", "error"),
     DELIVERED("Delivered", "info");
 
     private final String displayName;
@@ -21,9 +18,5 @@ public enum OrderStatus {
 
     public String getColorCode() {
         return colorCode;
-    }
-
-    public boolean isTerminalState() {
-        return this == COMPLETED || this == CANCELLED || this == DELIVERED;
     }
 }

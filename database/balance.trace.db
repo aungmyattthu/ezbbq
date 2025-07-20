@@ -27,3 +27,6 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\00
        add constraint FKt6wv8m7eshksp5kp8w4b2d1dm 
        foreign key (order_id) 
        references order [42001-232]
+2025-07-20 14:50:51.690784+06:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DINING_SESSION" not found; SQL statement:
+select s1_0.table_id,s1_0.id,s1_0.end_time,s1_0.is_active,s1_0.start_time from dining_session s1_0 where s1_0.table_id=? [42102-232]

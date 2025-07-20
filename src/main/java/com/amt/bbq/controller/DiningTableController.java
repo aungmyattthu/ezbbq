@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amt.bbq.controller.dto.DiningTableCreateRequestDto;
-import com.amt.bbq.controller.dto.DiningTableResponseDto;
-import com.amt.bbq.controller.dto.DiningTableSearch;
-import com.amt.bbq.controller.dto.UpdateDiningTableRequestDto;
+import com.amt.bbq.controller.dto.diningTable.DiningTableCreateRequestDto;
+import com.amt.bbq.controller.dto.diningTable.DiningTableResponseDto;
+import com.amt.bbq.controller.dto.diningTable.DiningTableSearch;
+import com.amt.bbq.controller.dto.diningTable.DiningTableUpdateRequestDto;
 import com.amt.bbq.service.DiningTableService;
 
 import jakarta.validation.Valid;
@@ -73,10 +73,15 @@ public class DiningTableController {
 	@PatchMapping("/{id}")
 	public ResponseEntity<DiningTableResponseDto> updateTable(
 	    @PathVariable Long id,
-	    @Valid @RequestBody UpdateDiningTableRequestDto request
+	    @Valid @RequestBody DiningTableUpdateRequestDto request
 	) {
 	    DiningTableResponseDto updatedTable = service.updateTable(id, request);
 	    return ResponseEntity.ok(updatedTable);
+	}
+	
+	@PatchMapping("/{id}/end")
+	public ResponseEntity<DiningTableResponseDto> endSession(@PathVariable Long id) {
+		return ResponseEntity.ok(service.endSession(id));
 	}
 	
 	@DeleteMapping("/{id}")
